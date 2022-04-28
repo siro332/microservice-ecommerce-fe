@@ -2,8 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useKeycloak } from "@react-keycloak/web"
 function Header({ categories }) {
-    
-    const [ keycloak, initialized ] = useKeycloak();
+
+    const { keycloak, initialized } = useKeycloak();
     return (
         <header className="header header-10 header-intro-clearance">
             <div className="header-top">
@@ -11,8 +11,20 @@ function Header({ categories }) {
                     <div className="header-left">
                         <a href="tel:#"><i className="icon-phone" />Hỗ trợ: +84 0334 998 977</a>
                     </div>{/* End .header-left */}
-                    <div className="header-right">                  
-                            <a href="#signin-modal" data-toggle="modal">Đăng nhập / Đăng ký</a>
+                    <div className="header-right">
+                        {!keycloak.authenticated && (
+                            <a href="#" onClick={keycloak.login}>Đăng nhập / Đăng ký</a>
+                        )}
+
+                        {!!keycloak.authenticated && (
+                            <div>
+                                <span>
+                                    Xin chào <a href="#" onClick={keycloak.accountManagement}> {keycloak.tokenParsed.name}!</a>
+                                </span>
+                                <a href="#" onClick={keycloak.logout}> Đăng xuất</a>
+                            </div>
+                        )}
+
                     </div>{/* End .header-right */}
                 </div>{/* End .container */}
             </div>{/* End .header-top */}
@@ -24,7 +36,7 @@ function Header({ categories }) {
                             <i className="icon-bars" />
                         </button>
                         <NavLink className="logo" to="/">
-                            <img src="assets/images/demos/demo-13/logo.png" alt="Molla Logo" width={105} height={25} />
+                            <img src="/assets/images/demos/demo-13/logo.png" alt="Molla Logo" width={105} height={25} />
                         </NavLink>
                     </div>{/* End .header-left */}
                     <div className="header-center">
@@ -84,7 +96,7 @@ function Header({ categories }) {
                                             </div>{/* End .product-cart-details */}
                                             <figure className="product-image-container">
                                                 <a href="product.html" className="product-image">
-                                                    <img src="assets/images/products/cart/product-1.jpg" alt="product" />
+                                                    <img src="/assets/images/products/cart/product-1.jpg" alt="product" />
                                                 </a>
                                             </figure>
                                             <a href="#" className="btn-remove" title="Remove Product"><i className="icon-close" /></a>
@@ -101,7 +113,7 @@ function Header({ categories }) {
                                             </div>{/* End .product-cart-details */}
                                             <figure className="product-image-container">
                                                 <a href="product.html" className="product-image">
-                                                    <img src="assets/images/products/cart/product-2.jpg" alt="product" />
+                                                    <img src="/assets/images/products/cart/product-2.jpg" alt="product" />
                                                 </a>
                                             </figure>
                                             <a href="#" className="btn-remove" title="Remove Product"><i className="icon-close" /></a>
@@ -131,10 +143,10 @@ function Header({ categories }) {
                             <div className="dropdown-menu ">
                                 <nav className="side-nav">
                                     <ul className="menu-vertical sf-arrows">
-                                        {categories.map((item ,index) => (
+                                        {categories.map((item, index) => (
                                             item.subCategories && item.subCategories.length > 0 ?
                                                 <li key={item.code} className="megamenu-container">
-                                                    <a className="sf-with-ul" href="">{item.name}</a>
+                                                    <NavLink className="sf-with-ul" to={"/category/" + item.code}>{item.name}</NavLink>
                                                     <div key={item.code} className="megamenu">
                                                         <div className="row no-gutters">
                                                             <div className="col-md-8">
@@ -147,11 +159,12 @@ function Header({ categories }) {
                                                                             <div key={subCatRow.code} className="col-md-6">
                                                                                 {subCatRow.map(col => (
                                                                                     <div key={col.code}>
-                                                                                        <a href="#" className="menu-title">{col.name}</a>{/* End .menu-title */}
+                                                                                        <NavLink className="menu-title" to={"/category/" + col.code}>{col.name}</NavLink>
                                                                                         {col.subCategories && col.subCategories.length > 0 ?
                                                                                             <ul>
                                                                                                 {col.subCategories.map((colSubCat) => (
-                                                                                                    <li key={colSubCat.code}><a href="#">{colSubCat.name}</a></li>
+                                                                                                    <li key={colSubCat.code}><NavLink to={"/category/" + colSubCat.code}>{colSubCat.name}</NavLink>
+                                                                                                    </li>
                                                                                                 ))}
                                                                                             </ul>
                                                                                             : <div />}
@@ -166,14 +179,15 @@ function Header({ categories }) {
                                                             <div className="col-md-4">
                                                                 <div className="banner banner-overlay">
                                                                     <a href="category.html" className="banner banner-menu">
-                                                                        <img src="assets/images/demos/demo-13/menu/banner-1.jpg" alt="Banner" />
+                                                                        <img src="/assets/images/demos/demo-13/menu/banner-1.jpg" alt="Banner" />
                                                                     </a>
                                                                 </div>{/* End .banner banner-overlay */}
                                                             </div>{/* End .col-md-4 */}
                                                         </div>{/* End .row */}
                                                     </div>
                                                 </li>
-                                                : <li key={item.code}><a href="#">{item.name}</a></li>
+                                                : <li key={item.code}><NavLink to={"/category/" + item.code}>{item.name}</NavLink>
+                                                </li>
                                         ))}
                                     </ul>{/* End .menu-vertical */}
                                 </nav>{/* End .side-nav */}

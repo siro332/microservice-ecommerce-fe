@@ -4,11 +4,14 @@ import HomeBanner from "./components/banner";
 import LoginForm from "../common/login-form";
 import { PATH } from "../../constants/API"
 import Header from "../common/header";
+import {useKeycloak} from "@react-keycloak/web";
 function Home() {   
     const [sliderLoading, setSliderLoading] = useState(true);
     const [sliderArray, setSliderArray] = useState([]);
     const [categoriesLoading, setCategoriesLoading] = useState(true);
     const [categories, setCategories] = useState([]);
+    
+    
     useEffect(async () => {
 
         setSliderLoading(true);
@@ -54,7 +57,7 @@ function Home() {
                                     <a href="category.html" className="cat-block">
                                         <figure>
                                             <span>
-                                                <img src="assets/images/demos/demo-13/cats/1.jpg" alt="Category image" />
+                                                <img src="/assets/images/demos/demo-13/cats/1.jpg" alt="Category image" />
                                             </span>
                                         </figure>
                                         <h3 className="cat-block-title">Computer &amp; Laptop</h3>{/* End .cat-block-title */}
@@ -64,7 +67,7 @@ function Home() {
                                     <a href="category.html" className="cat-block">
                                         <figure>
                                             <span>
-                                                <img src="assets/images/demos/demo-13/cats/2.jpg" alt="Category image" />
+                                                <img src="/assets/images/demos/demo-13/cats/2.jpg" alt="Category image" />
                                             </span>
                                         </figure>
                                         <h3 className="cat-block-title">Lighting</h3>{/* End .cat-block-title */}
@@ -74,7 +77,7 @@ function Home() {
                                     <a href="category.html" className="cat-block">
                                         <figure>
                                             <span>
-                                                <img src="assets/images/demos/demo-13/cats/3.jpg" alt="Category image" />
+                                                <img src="/assets/images/demos/demo-13/cats/3.jpg" alt="Category image" />
                                             </span>
                                         </figure>
                                         <h3 className="cat-block-title">Smart Phones</h3>{/* End .cat-block-title */}
@@ -84,7 +87,7 @@ function Home() {
                                     <a href="category.html" className="cat-block">
                                         <figure>
                                             <span>
-                                                <img src="assets/images/demos/demo-13/cats/4.jpg" alt="Category image" />
+                                                <img src="/assets/images/demos/demo-13/cats/4.jpg" alt="Category image" />
                                             </span>
                                         </figure>
                                         <h3 className="cat-block-title">Televisions</h3>{/* End .cat-block-title */}
@@ -94,7 +97,7 @@ function Home() {
                                     <a href="category.html" className="cat-block">
                                         <figure>
                                             <span>
-                                                <img src="assets/images/demos/demo-13/cats/5.jpg" alt="Category image" />
+                                                <img src="/assets/images/demos/demo-13/cats/5.jpg" alt="Category image" />
                                             </span>
                                         </figure>
                                         <h3 className="cat-block-title">Cooking</h3>{/* End .cat-block-title */}
@@ -104,7 +107,7 @@ function Home() {
                                     <a href="category.html" className="cat-block">
                                         <figure>
                                             <span>
-                                                <img src="assets/images/demos/demo-13/cats/6.jpg" alt="Category image" />
+                                                <img src="/assets/images/demos/demo-13/cats/6.jpg" alt="Category image" />
                                             </span>
                                         </figure>
                                         <h3 className="cat-block-title">Furniture</h3>{/* End .cat-block-title */}
@@ -119,7 +122,7 @@ function Home() {
                             <div className="col-sm-6 col-lg-3">
                                 <div className="banner banner-overlay">
                                     <a href="#">
-                                        <img src="assets/images/demos/demo-13/banners/banner-1.jpg" alt="Banner" />
+                                        <img src="/assets/images/demos/demo-13/banners/banner-1.jpg" alt="Banner" />
                                     </a>
                                     <div className="banner-content">
                                         <h4 className="banner-subtitle text-white"><a href="#">Weekend Sale</a></h4>{/* End .banner-subtitle */}
@@ -131,7 +134,7 @@ function Home() {
                             <div className="col-sm-6 col-lg-3 order-lg-last">
                                 <div className="banner banner-overlay">
                                     <a href="#">
-                                        <img src="assets/images/demos/demo-13/banners/banner-3.jpg" alt="Banner" />
+                                        <img src="/assets/images/demos/demo-13/banners/banner-3.jpg" alt="Banner" />
                                     </a>
                                     <div className="banner-content">
                                         <h4 className="banner-subtitle text-white"><a href="#">Smart Offer</a></h4>{/* End .banner-subtitle */}
@@ -143,7 +146,7 @@ function Home() {
                             <div className="col-lg-6">
                                 <div className="banner banner-overlay">
                                     <a href="#">
-                                        <img src="assets/images/demos/demo-13/banners/banner-2.jpg" alt="Banner" />
+                                        <img src="/assets/images/demos/demo-13/banners/banner-2.jpg" alt="Banner" />
                                     </a>
                                     <div className="banner-content">
                                         <h4 className="banner-subtitle text-white d-none d-sm-block"><a href="#">Amazing Value</a></h4>{/* End .banner-subtitle */}
@@ -211,7 +214,7 @@ function Home() {
                                             <figure className="product-media">
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-1.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-1.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-action-vertical">
                                                     <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -244,7 +247,7 @@ function Home() {
                                                 <span className="product-label label-top">Top</span>
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-2.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-2.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-countdown" data-until="+9h" data-format="HMS" data-relative="true" data-labels-short="true" />{/* End .product-countdown */}
                                                 <div className="product-action-vertical">
@@ -282,7 +285,7 @@ function Home() {
                                             <figure className="product-media">
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-3.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-3.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-action-vertical">
                                                     <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -318,7 +321,7 @@ function Home() {
                                             <figure className="product-media">
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-4.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-4.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-action-vertical">
                                                     <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -355,7 +358,7 @@ function Home() {
                                                 <span className="product-label label-top">Top</span>
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-5.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-5.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-countdown" data-until="+7h" data-format="HMS" data-relative="true" data-labels-short="true" />{/* End .product-countdown */}
                                                 <div className="product-action-vertical">
@@ -388,7 +391,7 @@ function Home() {
                                             <figure className="product-media">
                                                 <span className="product-label label-new">New</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-6.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-6.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-action-vertical">
                                                     <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -446,7 +449,7 @@ function Home() {
                                             <figure className="product-media">
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-4.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-4.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-action-vertical">
                                                     <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -482,7 +485,7 @@ function Home() {
                                             <figure className="product-media">
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-1.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-1.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-action-vertical">
                                                     <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -515,7 +518,7 @@ function Home() {
                                                 <span className="product-label label-top">Top</span>
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-2.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-2.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-countdown" data-until="+9h" data-format="HMS" data-relative="true" data-labels-short="true" />{/* End .product-countdown */}
                                                 <div className="product-action-vertical">
@@ -553,7 +556,7 @@ function Home() {
                                             <figure className="product-media">
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-3.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-3.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-action-vertical">
                                                     <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -590,7 +593,7 @@ function Home() {
                                                 <span className="product-label label-top">Top</span>
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-5.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-5.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-countdown" data-until="+7h" data-format="HMS" data-relative="true" data-labels-short="true" />{/* End .product-countdown */}
                                                 <div className="product-action-vertical">
@@ -650,7 +653,7 @@ function Home() {
                                             <figure className="product-media">
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-3.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-3.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-action-vertical">
                                                     <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -687,7 +690,7 @@ function Home() {
                                                 <span className="product-label label-top">Top</span>
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-5.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-5.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-countdown" data-until="+7h" data-format="HMS" data-relative="true" data-labels-short="true" />{/* End .product-countdown */}
                                                 <div className="product-action-vertical">
@@ -720,7 +723,7 @@ function Home() {
                                             <figure className="product-media">
                                                 <span className="product-label label-new">New</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-6.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-6.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-action-vertical">
                                                     <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -751,7 +754,7 @@ function Home() {
                                             <figure className="product-media">
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-4.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-4.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-action-vertical">
                                                     <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -787,7 +790,7 @@ function Home() {
                                             <figure className="product-media">
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-1.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-1.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-action-vertical">
                                                     <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -820,7 +823,7 @@ function Home() {
                                                 <span className="product-label label-top">Top</span>
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-2.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-2.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-countdown" data-until="+9h" data-format="HMS" data-relative="true" data-labels-short="true" />{/* End .product-countdown */}
                                                 <div className="product-action-vertical">
@@ -885,7 +888,7 @@ function Home() {
                                             <figure className="product-media">
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-1.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-1.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-action-vertical">
                                                     <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -917,7 +920,7 @@ function Home() {
                                             <figure className="product-media">
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-3.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-3.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-action-vertical">
                                                     <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -953,7 +956,7 @@ function Home() {
                                             <figure className="product-media">
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-4.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-4.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-action-vertical">
                                                     <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -990,7 +993,7 @@ function Home() {
                                                 <span className="product-label label-top">Top</span>
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-2.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-2.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-countdown" data-until="+9h" data-format="HMS" data-relative="true" data-labels-short="true" />{/* End .product-countdown */}
                                                 <div className="product-action-vertical">
@@ -1055,7 +1058,7 @@ function Home() {
                                             <figure className="product-media">
                                                 <span className="product-label label-new">New</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-6.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-6.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-action-vertical">
                                                     <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1086,7 +1089,7 @@ function Home() {
                                             <figure className="product-media">
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-1.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-1.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-action-vertical">
                                                     <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1119,7 +1122,7 @@ function Home() {
                                                 <span className="product-label label-top">Top</span>
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-5.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-5.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-countdown" data-until="+7h" data-format="HMS" data-relative="true" data-labels-short="true" />{/* End .product-countdown */}
                                                 <div className="product-action-vertical">
@@ -1152,7 +1155,7 @@ function Home() {
                                             <figure className="product-media">
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-3.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-3.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-action-vertical">
                                                     <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1188,7 +1191,7 @@ function Home() {
                                             <figure className="product-media">
                                                 <span className="product-label label-sale">Sale</span>
                                                 <a href="product.html">
-                                                    <img src="assets/images/demos/demo-13/products/product-4.jpg" alt="Product image" className="product-image" />
+                                                    <img src="/assets/images/demos/demo-13/products/product-4.jpg" alt="Product image" className="product-image" />
                                                 </a>
                                                 <div className="product-action-vertical">
                                                     <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1275,7 +1278,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-new">New</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-6.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-6.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1306,7 +1309,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-top">Top</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-7.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-7.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1336,7 +1339,7 @@ function Home() {
                                     <div className="product">
                                         <figure className="product-media">
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-8.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-8.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1367,7 +1370,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-new">New</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-9.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-9.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1403,7 +1406,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-sale">Sale</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-10.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-10.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1466,7 +1469,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-new">New</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-9.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-9.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1502,7 +1505,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-sale">Sale</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-10.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-10.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1538,7 +1541,7 @@ function Home() {
                                     <div className="product">
                                         <figure className="product-media">
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-8.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-8.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1569,7 +1572,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-top">Top</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-7.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-7.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1627,7 +1630,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-top">Top</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-7.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-7.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1657,7 +1660,7 @@ function Home() {
                                     <div className="product">
                                         <figure className="product-media">
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-8.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-8.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1688,7 +1691,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-new">New</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-6.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-6.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1719,7 +1722,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-sale">Sale</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-10.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-10.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1756,7 +1759,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-new">New</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-9.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-9.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1798,7 +1801,7 @@ function Home() {
                             <div className="col-lg-6">
                                 <div className="banner banner-overlay banner-overlay-light">
                                     <a href="#">
-                                        <img src="assets/images/demos/demo-13/banners/banner-4.jpg" alt="Banner" />
+                                        <img src="/assets/images/demos/demo-13/banners/banner-4.jpg" alt="Banner" />
                                     </a>
                                     <div className="banner-content">
                                         <h4 className="banner-subtitle d-none d-sm-block"><a href="#">Spring Sale is Coming</a></h4>{/* End .banner-subtitle */}
@@ -1810,7 +1813,7 @@ function Home() {
                             <div className="col-lg-6">
                                 <div className="banner banner-overlay">
                                     <a href="#">
-                                        <img src="assets/images/demos/demo-13/banners/banner-5.png" alt="Banner" />
+                                        <img src="/assets/images/demos/demo-13/banners/banner-5.png" alt="Banner" />
                                     </a>
                                     <div className="banner-content">
                                         <h4 className="banner-subtitle text-white  d-none d-sm-block"><a href="#">Amazing Value</a></h4>{/* End .banner-subtitle */}
@@ -1871,7 +1874,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-new">New</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-11.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-11.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1905,7 +1908,7 @@ function Home() {
                                     <div className="product">
                                         <figure className="product-media">
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-12.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-12.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1936,7 +1939,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-sale">Sale</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-13.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-13.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -1971,7 +1974,7 @@ function Home() {
                                     <div className="product">
                                         <figure className="product-media">
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-14.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-14.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2006,7 +2009,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-sale">Sale</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-15.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-15.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2069,7 +2072,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-sale">Sale</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-13.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-13.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2104,7 +2107,7 @@ function Home() {
                                     <div className="product">
                                         <figure className="product-media">
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-14.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-14.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2139,7 +2142,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-new">New</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-11.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-11.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2174,7 +2177,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-sale">Sale</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-15.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-15.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2209,7 +2212,7 @@ function Home() {
                                     <div className="product">
                                         <figure className="product-media">
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-12.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-12.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2266,7 +2269,7 @@ function Home() {
                                     <div className="product">
                                         <figure className="product-media">
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-12.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-12.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2297,7 +2300,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-sale">Sale</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-13.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-13.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2332,7 +2335,7 @@ function Home() {
                                     <div className="product">
                                         <figure className="product-media">
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-14.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-14.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2367,7 +2370,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-sale">Sale</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-15.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-15.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2452,7 +2455,7 @@ function Home() {
                                     <div className="product">
                                         <figure className="product-media">
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-16.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-16.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2483,7 +2486,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-new">New</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-17.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-17.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2513,7 +2516,7 @@ function Home() {
                                     <div className="product">
                                         <figure className="product-media">
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-18.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-18.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2547,7 +2550,7 @@ function Home() {
                                     <div className="product">
                                         <figure className="product-media">
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-19.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-19.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2581,7 +2584,7 @@ function Home() {
                                     <div className="product">
                                         <figure className="product-media">
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-20.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-20.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2642,7 +2645,7 @@ function Home() {
                                     <div className="product">
                                         <figure className="product-media">
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-18.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-18.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2676,7 +2679,7 @@ function Home() {
                                     <div className="product">
                                         <figure className="product-media">
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-19.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-19.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2710,7 +2713,7 @@ function Home() {
                                     <div className="product">
                                         <figure className="product-media">
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-16.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-16.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2740,7 +2743,7 @@ function Home() {
                                     <div className="product">
                                         <figure className="product-media">
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-20.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-20.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2775,7 +2778,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-new">New</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-17.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-17.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2833,7 +2836,7 @@ function Home() {
                                         <figure className="product-media">
                                             <span className="product-label label-new">New</span>
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-17.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-17.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2863,7 +2866,7 @@ function Home() {
                                     <div className="product">
                                         <figure className="product-media">
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-20.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-20.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2897,7 +2900,7 @@ function Home() {
                                     <div className="product">
                                         <figure className="product-media">
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-19.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-19.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2931,7 +2934,7 @@ function Home() {
                                     <div className="product">
                                         <figure className="product-media">
                                             <a href="product.html">
-                                                <img src="assets/images/demos/demo-13/products/product-18.jpg" alt="Product image" className="product-image" />
+                                                <img src="/assets/images/demos/demo-13/products/product-18.jpg" alt="Product image" className="product-image" />
                                             </a>
                                             <div className="product-action-vertical">
                                                 <a href="#" className="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
@@ -2998,25 +3001,25 @@ function Home() {
                               }
                           }">
                             <a href="#" className="brand">
-                                <img src="assets/images/brands/1.png" alt="Brand Name" />
+                                <img src="/assets/images/brands/1.png" alt="Brand Name" />
                             </a>
                             <a href="#" className="brand">
-                                <img src="assets/images/brands/2.png" alt="Brand Name" />
+                                <img src="/assets/images/brands/2.png" alt="Brand Name" />
                             </a>
                             <a href="#" className="brand">
-                                <img src="assets/images/brands/3.png" alt="Brand Name" />
+                                <img src="/assets/images/brands/3.png" alt="Brand Name" />
                             </a>
                             <a href="#" className="brand">
-                                <img src="assets/images/brands/4.png" alt="Brand Name" />
+                                <img src="/assets/images/brands/4.png" alt="Brand Name" />
                             </a>
                             <a href="#" className="brand">
-                                <img src="assets/images/brands/5.png" alt="Brand Name" />
+                                <img src="/assets/images/brands/5.png" alt="Brand Name" />
                             </a>
                             <a href="#" className="brand">
-                                <img src="assets/images/brands/6.png" alt="Brand Name" />
+                                <img src="/assets/images/brands/6.png" alt="Brand Name" />
                             </a>
                             <a href="#" className="brand">
-                                <img src="assets/images/brands/7.png" alt="Brand Name" />
+                                <img src="/assets/images/brands/7.png" alt="Brand Name" />
                             </a>
                         </div>{/* End .owl-carousel */}
                     </div>{/* End .container */}
@@ -3235,15 +3238,14 @@ function Home() {
                     </div>{/* End .social-icons */}
                 </div>{/* End .mobile-menu-wrapper */}
             </div>{/* End .mobile-menu-container */}
-            <LoginForm></LoginForm>
             <div className="container newsletter-popup-container mfp-hide" id="newsletter-popup-form">
                 <div className="row justify-content-center">
                     <div className="col-10">
                         <div className="row no-gutters bg-white newsletter-popup-content">
                             <div className="col-xl-3-5col col-lg-7 banner-content-wrap">
                                 <div className="banner-content text-center">
-                                    <img src="assets/images/popup/newsletter/logo.png" className="logo" alt="logo" width={60} height={15} />
-                                    <h2 className="banner-title">get <span>25<light>%</light></span> off</h2>
+                                    <img src="/assets/images/popup/newsletter/logo.png" className="logo" alt="logo" width={60} height={15} />
+                                    <h2 className="banner-title">get <span>25%</span> off</h2>
                                     <p>Subscribe to the Molla eCommerce newsletter to receive timely updates from your favorite products.</p>
                                     <form action="#">
                                         <div className="input-group input-group-round">
@@ -3260,7 +3262,7 @@ function Home() {
                                 </div>
                             </div>
                             <div className="col-xl-2-5col col-lg-5 ">
-                                <img src="assets/images/popup/newsletter/img-1.jpg" className="newsletter-img" alt="newsletter" />
+                                <img src="/assets/images/popup/newsletter/img-1.jpg" className="newsletter-img" alt="newsletter" />
                             </div>
                         </div>
                     </div>

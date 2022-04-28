@@ -19,7 +19,6 @@ function HomeBanner({ sliderArray }) {
             }
         },
     };
-    console.log(sliderArray)
     return (
 
         sliderArray && sliderArray.length > 0 ?
