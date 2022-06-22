@@ -7,28 +7,7 @@ $(document).ready(function () {
 
     // Header Search Toggle
 
-    var $searchWrapper = $('.header-search-wrapper'),
-    	$body = $('body'),
-        $searchToggle = $('.search-toggle');
-
-	$searchToggle.on('click', function (e) {
-		$searchWrapper.toggleClass('show');
-		$(this).toggleClass('active');
-		$searchWrapper.find('input').focus();
-		e.preventDefault();
-	});
-
-	$body.on('click', function (e) {
-		if ( $searchWrapper.hasClass('show') ) {
-			$searchWrapper.removeClass('show');
-			$searchToggle.removeClass('active');
-			$body.removeClass('is-search-active');
-		}
-	});
-
-	$('.header-search').on('click', function (e) {
-		e.stopPropagation();
-	});
+    var	$body = $('body')
 
 	// Sticky header 
     var catDropdown = $('.category-dropdown'),

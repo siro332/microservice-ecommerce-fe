@@ -1,15 +1,95 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useKeycloak } from "@react-keycloak/web"
+import axios from "axios";
+import { PATH } from "../../constants/API";
+import { CartContext } from "../helpers/context/cart-context";
+import { SearchContext } from "../helpers/context/search-context";
 function Header({ categories }) {
-
     const { keycloak, initialized } = useKeycloak();
+    const [userCart, setUserCart] = useState(undefined);
+    const [deletingItem, setDeletingItem] = useState(-1);
+    const [searchParam, setSearchParam] = useState("");
+    const cartContext = useContext(CartContext);
+    const searchContext = useContext(SearchContext);
+    const location = useLocation();
+    const navigate = useNavigate();
+    useEffect(
+        () => {
+            async function getUserInfo() {
+                try {
+                    if (keycloak.authenticated) {
+                        const token = 'bearer ' + keycloak.token
+                        console.log(token)
+                        const response = await axios.get(PATH.API_ROOT_URL + PATH.API_ORDER + "/cart/user", {
+                            headers: {
+                                'Authorization': token
+                            }
+                        });
+                        console.log(response.data)
+                        setUserCart(response.data)
+                    }
+                } catch (error) {
+                    console.error(error.message)
+                }
+            }
+            getUserInfo()
+        }
+        , [keycloak.authenticated, cartContext, keycloak.token])
+
+    useEffect(
+        () => {
+            async function deleteItem() {
+                try {
+                    if (deletingItem > -1) {
+                        await axios.post(PATH.API_ROOT_URL + PATH.API_ORDER + "/cart/deleteItem", {
+                            productCode: userCart.cartItemDtos[deletingItem].productDto.code,
+                            productInventory: userCart.cartItemDtos[deletingItem].inventoryItem.sku,
+                            units: userCart.cartItemDtos[deletingItem].units
+                        }, {
+                            headers: {
+                                'Authorization': 'Bearer ' + keycloak.token
+                            }
+                        });
+                        const temp = userCart;
+                        temp.cartItemDtos.splice(deletingItem, 1)
+                        setUserCart(temp)
+                    }
+                    setDeletingItem(-1)
+                } catch (error) {
+                    console.error(error.message)
+                }
+            }
+            deleteItem()
+        }
+        , [deletingItem, keycloak, userCart])
+
+    const getInputValue = (event) => {
+        // show the user input value to console
+        setSearchParam(event.target.value)
+    };
+    useEffect(
+        () => {
+            async function setSearch() {
+            }
+            setSearch();
+        }, [searchParam]);
+    const handleSearch = () => {
+        const path = location.pathname.split("/")[1];
+        (searchContext.search)(searchParam)
+        if (path !== "search" && path !== "category") {
+            navigate("/search", { replace: true });
+        }
+    }
+    const handleRemoveCartItem = (index) => {
+        setDeletingItem(index)
+    }
     return (
         <header className="header header-10 header-intro-clearance">
             <div className="header-top">
                 <div className="container">
                     <div className="header-left">
-                        <a href="tel:#"><i className="icon-phone" />Hỗ trợ: +84 0334 998 977</a>
+                        <a href="tel:#"><i className="icon-phone" />Hỗ trợ: +84 0334 998 977 </a>
                     </div>{/* End .header-left */}
                     <div className="header-right">
                         {!keycloak.authenticated && (
@@ -19,7 +99,7 @@ function Header({ categories }) {
                         {!!keycloak.authenticated && (
                             <div>
                                 <span>
-                                    Xin chào <a href="#" onClick={keycloak.accountManagement}> {keycloak.tokenParsed.name}!</a>
+                                    Xin chào <NavLink to={"/dashboard"}>{keycloak.tokenParsed.name}!</NavLink>
                                 </span>
                                 <a href="#" onClick={keycloak.logout}> Đăng xuất</a>
                             </div>
@@ -42,94 +122,66 @@ function Header({ categories }) {
                     <div className="header-center">
                         <div className="header-search header-search-extended header-search-visible header-search-no-radius d-none d-lg-block">
                             <a href="#" className="search-toggle" role="button"><i className="icon-search" /></a>
-                            <form action="#" method="get">
-                                <div className="header-search-wrapper search-wrapper-wide">
-                                    <label htmlFor="q" className="sr-only">Search</label>
-                                    <input type="search" className="form-control" name="q" id="q" placeholder="Tìm kiếm sản phẩm ..." required />
-                                    <button className="btn btn-primary" type="submit"><i className="icon-search" /></button>
-                                </div>{/* End .header-search-wrapper */}
-                            </form>
+                            <div className="header-search-wrapper search-wrapper-wide">
+                                <label htmlFor="q" className="sr-only">Search</label>
+                                <input type="search" onChange={getInputValue} className="form-control" name="q" id="q" placeholder="Tìm kiếm sản phẩm ..." required />
+                                <button className="btn btn-primary" onClick={() => handleSearch()}><i className="icon-search" /></button>
+                            </div>{/* End .header-search-wrapper */}
                         </div>{/* End .header-search */}
                     </div>
                     <div className="header-right">
-                        <div className="header-dropdown-link">
-                            <div className="dropdown compare-dropdown">
-                                <div className="dropdown-menu dropdown-menu-right">
-                                    <ul className="compare-products">
-                                        <li className="compare-product">
-                                            <a href="#" className="btn-remove" title="Remove Product"><i className="icon-close" /></a>
-                                            <h4 className="compare-product-title"><a href="product.html">Blue Night Dress</a></h4>
-                                        </li>
-                                        <li className="compare-product">
-                                            <a href="#" className="btn-remove" title="Remove Product"><i className="icon-close" /></a>
-                                            <h4 className="compare-product-title"><a href="product.html">White Long Skirt</a></h4>
-                                        </li>
-                                    </ul>
-                                    <div className="compare-actions">
-                                        <a href="#" className="action-link">Clear All</a>
-                                        <a href="#" className="btn btn-outline-primary-2"><span>Compare</span><i className="icon-long-arrow-right" /></a>
-                                    </div>
-                                </div>{/* End .dropdown-menu */}
-                            </div>{/* End .compare-dropdown */}
-                            <a href="wishlist.html" className="wishlist-link">
-                                <i className="icon-heart-o" />
-                                <span className="wishlist-count">3</span>
-                                <span className="wishlist-txt">Yêu thích</span>
-                            </a>
-                            <div className="dropdown cart-dropdown">
-                                <a href="#" className="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">
-                                    <i className="icon-shopping-cart" />
-                                    <span className="cart-count">2</span>
-                                    <span className="cart-txt">Giỏ Hàng</span>
-                                </a>
-                                <div className="dropdown-menu dropdown-menu-right">
-                                    <div className="dropdown-cart-products">
-                                        <div className="product">
-                                            <div className="product-cart-details">
-                                                <h4 className="product-title">
-                                                    <a href="product.html">Beige knitted elastic runner shoes</a>
-                                                </h4>
-                                                <span className="cart-product-info">
-                                                    <span className="cart-product-qty">1</span>
-                                                    x $84.00
-                                                </span>
-                                            </div>{/* End .product-cart-details */}
-                                            <figure className="product-image-container">
-                                                <a href="product.html" className="product-image">
-                                                    <img src="/assets/images/products/cart/product-1.jpg" alt="product" />
-                                                </a>
-                                            </figure>
-                                            <a href="#" className="btn-remove" title="Remove Product"><i className="icon-close" /></a>
-                                        </div>{/* End .product */}
-                                        <div className="product">
-                                            <div className="product-cart-details">
-                                                <h4 className="product-title">
-                                                    <a href="product.html">Blue utility pinafore denim dress</a>
-                                                </h4>
-                                                <span className="cart-product-info">
-                                                    <span className="cart-product-qty">1</span>
-                                                    x $76.00
-                                                </span>
-                                            </div>{/* End .product-cart-details */}
-                                            <figure className="product-image-container">
-                                                <a href="product.html" className="product-image">
-                                                    <img src="/assets/images/products/cart/product-2.jpg" alt="product" />
-                                                </a>
-                                            </figure>
-                                            <a href="#" className="btn-remove" title="Remove Product"><i className="icon-close" /></a>
-                                        </div>{/* End .product */}
-                                    </div>{/* End .cart-product */}
-                                    <div className="dropdown-cart-total">
-                                        <span>Total</span>
-                                        <span className="cart-total-price">$160.00</span>
-                                    </div>{/* End .dropdown-cart-total */}
-                                    <div className="dropdown-cart-action">
-                                        <a href="cart.html" className="btn btn-primary">View Cart</a>
-                                        <a href="checkout.html" className="btn btn-outline-primary-2"><span>Checkout</span><i className="icon-long-arrow-right" /></a>
-                                    </div>{/* End .dropdown-cart-total */}
-                                </div>{/* End .dropdown-menu */}
-                            </div>{/* End .cart-dropdown */}
-                        </div>
+                        {userCart &&
+                            <div className="header-dropdown-link">
+                                {/* <NavLink to="/wishlist" className="wishlist-link">
+                                    <i className="icon-heart-o" />
+                                    <span className="wishlist-count">3</span>
+                                    <span className="wishlist-txt">Yêu thích</span>
+                                </NavLink> */}
+                                <div className="dropdown cart-dropdown">
+                                    <NavLink to={"/cart"} className="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-display="static">
+                                        <i className="icon-shopping-cart" />
+                                        {userCart.cartItemDtos.length > 0 &&
+                                            <span className="cart-count">{userCart.cartItemDtos.length}</span>
+                                        }
+                                        <span className="cart-txt">Giỏ Hàng</span>
+                                    </NavLink>
+                                    {userCart.cartItemDtos.length > 0 &&
+                                        <div className="dropdown-menu dropdown-menu-right">
+                                            <div className="dropdown-cart-products">
+                                                {userCart.cartItemDtos.map((item, index) => (
+                                                    <div className="product">
+                                                        <div className="product-cart-details">
+                                                            <h4 className="product-title">
+                                                                <NavLink to={"/product/" + item.productDto.code}>{item.productDto.name}</NavLink>
+                                                            </h4>
+                                                            <span className="cart-product-info">
+                                                                <span className="cart-product-qty">{item.units} </span>
+                                                                x {item.inventoryItem.retailPrice} VND
+                                                            </span>
+                                                        </div>{/* End .product-cart-details */}
+                                                        <figure className="product-image-container">
+                                                            <NavLink to={"/product/" + item.productDto.code} className="product-image">
+                                                                {item.productDto.mediaList != null && item.productDto.mediaList.length > 0 &&
+                                                                    <img src={item.productDto.mediaList[0].imgUrl} alt={item.productDto.mediaList[0].altText} />}
+
+                                                            </NavLink>
+                                                        </figure>
+                                                        <button onClick={() => handleRemoveCartItem(index)} className="btn-remove" title="Remove Product"><i className="icon-close" /></button>
+                                                    </div>
+                                                ))}
+                                            </div>{/* End .cart-product */}
+                                            <div className="dropdown-cart-total">
+                                                <span>Tổng cộng</span>
+                                                <span className="cart-total-price">{userCart.totals} VNĐ</span>
+                                            </div>{/* End .dropdown-cart-total */}
+                                            <div className="dropdown-cart-action">
+                                                <NavLink to={"/cart"} className="btn btn-primary">Xem giỏ hàng</NavLink>
+                                                <NavLink to={"/checkout"} className="btn btn-outline-primary-2"><span>Đặt hàng</span><i className="icon-long-arrow-right" /></NavLink>
+                                            </div>{/* End .dropdown-cart-total */}
+                                        </div>
+                                    }
+                                </div>{/* End .cart-dropdown */}
+                            </div>}
                     </div>{/* End .header-right */}
                 </div>{/* End .container */}
             </div>{/* End .header-middle */}
@@ -195,7 +247,7 @@ function Header({ categories }) {
                         </div>{/* End .category-dropdown */}
                     </div>{/* End .col-lg-3 */}
                     <div className="header-right">
-                        <i className="la la-lightbulb-o" /><p>Clearance Up to 30% Off</p>
+                        <i className="la la-lightbulb-o" /><p>Miễn Phí Vận Chuyển</p>
                     </div>
                 </div>{/* End .container */}
             </div>{/* End .header-bottom */}

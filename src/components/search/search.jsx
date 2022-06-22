@@ -7,15 +7,14 @@ import Header from "../common/header";
 import { useKeycloak } from "@react-keycloak/web";
 import CategoryProduct from "../home/components/categoryProduct";
 import { SearchContext } from "../helpers/context/search-context";
-function Category() {
-    const categoryCode = useParams();
+function Search({ categories }) {
     const searchContext = useContext(SearchContext);
     const [page, setPage] = useState(1);
     const [pageNumbers, setPageNumbers] = useState([]);
     const [sortBy, setSortBy] = useState("createTime");
     const [order, setOrder] = useState("DESC");
-    const [priceRange,setPriceRange] = useState([0,9999999999]);
-    const [category, setCategory] = useState(undefined);
+    const [priceRange, setPriceRange] = useState([0, 9999999999]);
+    const [categoryList, setCategory] = useState(undefined);
     const [categoryLoading, setCategoryLoading] = useState(true);
     const [productPage, setProductPage] = useState(undefined);
     const [productPageLoading, setProductPageLoading] = useState(true);
@@ -42,23 +41,9 @@ function Category() {
         () => {
             async function fetchData() {
                 // You can await here
-                setCategoryLoading(true);
-                try {
-                    const response = await axios.get(PATH.API_ROOT_URL + PATH.API_CATALOG + "/categories/" + categoryCode.id);
-                    setCategory(response.data);
-                } catch (error) {
-                    console.error(error.message);
-                }
-                setCategoryLoading(false);
-            }
-            fetchData();
-        }, [categoryCode.id]);
-    useEffect(
-        () => {
-            async function fetchData() {
-                // You can await here
                 setProductPageLoading(true);
                 try {
+                    console.log(searchContext.searchParam)
                     const response = await axios.post(PATH.API_ROOT_URL + PATH.API_SEARCH + "/product/search", {
                         productSearch: {
                             fields: ["all"],
@@ -69,12 +54,7 @@ function Category() {
                             order: order
                         },
                         optionalSearchRequestDto:
-                            [
-                                {
-                                    fields: ["categoriesCode"],
-                                    searchTerm: categoryCode.id
-                                }
-                            ],
+                            [],
                         optionalRangeSearchRequestDto:
                             [
                                 {
@@ -95,13 +75,14 @@ function Category() {
                             pageNumber.push(i);
                     }
                     setPageNumbers(pageNumber)
+                    console.log(response.data)
                 } catch (error) {
                     console.error(error.message);
                 }
                 setProductPageLoading(false);
             }
             fetchData();
-        }, [categoryCode.id, order, page, sortBy, searchContext, priceRange]);
+        }, [order, page, sortBy, searchContext, priceRange]);
     useEffect(
         () => {
             async function fetchData() {
@@ -118,14 +99,14 @@ function Category() {
         }, [order, sortBy]);
 
     return (
-        productPage != null && category != null && <div>
+        productPage != null && <div>
             <div className="page-wrapper">
                 <main className="main">
                     <nav aria-label="breadcrumb" className="breadcrumb-nav mb-3">
                         <div className="container">
                             <ol className="breadcrumb">
                                 <li className="breadcrumb-item"><a href="index.html">Trang chủ</a></li>
-                                <li className="breadcrumb-item active" aria-current="page">{category != null ? category.name : ""}</li>
+                                <li className="breadcrumb-item"><a href="#">Tìm kiếm</a></li>
                             </ol>
                         </div>{/* End .container */}
                     </nav>{/* End .breadcrumb-nav */}
@@ -134,21 +115,6 @@ function Category() {
                             <div className="row">
                                 <div className="col-lg-9 col-xl-4-5col">
                                     <div className="cat-blocks-container">
-                                        <div className="row">
-                                            {category != null && category.subCategories != null ? category.subCategories.map((item) => (
-                                                <div className="col-6 col-md-4 col-lg-3">
-                                                    <NavLink to={"/category/" + item.code} className="cat-block">
-                                                        <figure>
-                                                            <span>
-                                                                {item.mediaList != null && item.mediaList.length > 0 &&
-                                                                    <img src={item.mediaList[0].imgUrl} alt={item.mediaList[0].altText} />}
-                                                            </span>
-                                                        </figure>
-                                                        <h3 className="cat-block-title">{item.name}</h3>
-                                                    </NavLink>
-                                                </div>
-                                            )) : <div></div>}
-                                        </div>{/* End .row */}
                                     </div>{/* End .cat-blocks-container */}
                                     <div className="mb-2" />{/* End .mb-2 */}
                                     <div className="mb-4" />{/* End .mb-4 */}
@@ -193,8 +159,8 @@ function Category() {
                                                         </figure>{/* End .product-media */}
                                                         <div className="product-body">
                                                             <div className="product-cat">
-                                                                <NavLink to={"/category/" + categoryCode.id}>
-                                                                    {category.name}
+                                                                <NavLink to={"/category/" + item.categoriesCode[0]}>
+
                                                                 </NavLink>
                                                             </div>{/* End .product-cat */}
                                                             <h3 className="product-title">
@@ -206,7 +172,7 @@ function Category() {
                                                             </div>{/* End .product-price */}
                                                             <div className="ratings-container">
                                                                 <div className="ratings">
-                                                                    <div className="ratings-val" style={{ width: '50%' }} />{/* End .ratings-val */}
+                                                                    <div className="ratings-val" style={{ width: '80%' }} />{/* End .ratings-val */}
                                                                 </div>{/* End .ratings */}
                                                                 <span className="ratings-text">( {item.sales} đã bán )</span>
                                                             </div>{/* End .rating-container */}
@@ -241,60 +207,50 @@ function Category() {
                                 <aside className="col-lg-3 col-xl-5col order-lg-first">
                                     <div className="sidebar sidebar-shop">
                                         <div className="widget widget-categories">
-                                            <h3 className="widget-title">{category != null ? category.name : ""}</h3>{/* End .widget-title */}
+                                            <h3 className="widget-title">Danh mục</h3>{/* End .widget-title */}
                                             <div className="widget-body">
                                                 <div className="accordion" id="widget-cat-acc">
-                                                    {category != null && category.subCategories != null ?
-                                                        category.subCategories.map((item) => (
-                                                            <div className="acc-item">
-                                                                {item.subCategories && item.subCategories.length > 0 ?
-                                                                    <a className="collapsed" role="button" data-toggle="collapse" href={"#" + item.code} aria-expanded="false" aria-controls={item.code}>
-                                                                        {item.name}
-                                                                    </a> :
-                                                                    <NavLink to={"/category/" + item.code}>
-                                                                        {item.name}
-                                                                    </NavLink>}
-                                                                {item.subCategories && item.subCategories.length > 0 ?
-                                                                    <div id={item.code} className="collapse show" data-parent="#widget-cat-acc">
-                                                                        <div className="collapse-wrap">
-                                                                            <ul>
-                                                                                {item.subCategories.map((subCatRow) => (
-                                                                                    <li><NavLink to={"/category/" + subCatRow.code}>{subCatRow.name}</NavLink></li>
-                                                                                ))}
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div> : <div></div>}
-                                                            </div>
-                                                        )) : <div></div>
-                                                    }
+                                                    {categories != null && categories.map((category) => (
+                                                        <div className="acc-item">
+                                                            <NavLink to={"/category/" + category.code}>
+                                                                {category.name}
+                                                            </NavLink>
+                                                            <ul>
+                                                                {category.subCategories != null && category.subCategories.map((item) => (
+                                                                    <li><NavLink to={"/category/" + item.code}>{item.name}</NavLink></li>
+                                                                ))}
+                                                            </ul>
+                                                        </div>
+                                                    ))}
                                                 </div>{/* End .accordion */}
                                             </div>{/* End .widget-body */}
                                         </div>{/* End .widget */}
+                                        
                                         <div className="widget">
-                                            <h3 className="widget-title">Khoảng giá</h3>{/* End .widget-title */}
+                                            <h3 className="widget-title">Khoảng giá</h3>
                                             <div className="widget-body">
                                                 <div className="filter-items">
                                                     <div className="filter-item">
                                                         <div className="custom-control custom-radio">
-                                                            <input type="radio" className="custom-control-input" id="0-1000000" name="filter-price" onChange={handlePriceRangeChange}/>
+                                                            <input type="radio" className="custom-control-input" id="0-1000000" name="filter-price" onChange={handlePriceRangeChange} />
                                                             <label className="custom-control-label" htmlFor="0-1000000">Dưới 1 triệu</label>
                                                         </div>{/* End .custom-checkbox */}
                                                     </div>{/* End .filter-item */}
                                                     <div className="filter-item">
                                                         <div className="custom-control custom-radio">
-                                                            <input type="radio" className="custom-control-input" id="1000000-5000000" name="filter-price" onChange={handlePriceRangeChange}/>
+                                                            <input type="radio" className="custom-control-input" id="1000000-5000000" name="filter-price" onChange={handlePriceRangeChange} />
                                                             <label className="custom-control-label" htmlFor="1000000-5000000">Từ 1 đến 5 triệu</label>
                                                         </div>{/* End .custom-checkbox */}
                                                     </div>{/* End .filter-item */}
                                                     <div className="filter-item">
                                                         <div className="custom-control custom-radio">
-                                                            <input type="radio" className="custom-control-input" id="5000000-10000000" name="filter-price" onChange={handlePriceRangeChange}/>
+                                                            <input type="radio" className="custom-control-input" id="5000000-10000000" name="filter-price" onChange={handlePriceRangeChange} />
                                                             <label className="custom-control-label" htmlFor="5000000-10000000">Từ 5 đến 10 triệu</label>
                                                         </div>{/* End .custom-checkbox */}
                                                     </div>{/* End .filter-item */}
                                                     <div className="filter-item">
                                                         <div className="custom-control custom-radio">
-                                                            <input type="radio" className="custom-control-input" id="10000000-9999999999" name="filter-price" onChange={handlePriceRangeChange}/>
+                                                            <input type="radio" className="custom-control-input" id="10000000-9999999999" name="filter-price" onChange={handlePriceRangeChange} />
                                                             <label className="custom-control-label" htmlFor="10000000-9999999999">Trên 10 triệu</label>
                                                         </div>{/* End .custom-checkbox */}
                                                     </div>{/* End .filter-item */}
@@ -372,7 +328,7 @@ function Category() {
                                                     </div>{/* End .filter-item */}
                                                 </div>{/* End .filter-items */}
                                             </div>{/* End .widget-body */}
-                                        </div>{/* End .widget */}
+                                        </div>{/* End .widget */}                                       
                                         <div className="widget widget-banner-sidebar">
                                             <div className="banner-sidebar-title">ad banner 218 x 430px</div>{/* End .ad-title */}
                                             <div className="banner-sidebar banner-overlay">
@@ -605,4 +561,4 @@ function Category() {
         </div>
     );
 }
-export default Category;
+export default Search;

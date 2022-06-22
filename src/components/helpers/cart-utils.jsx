@@ -1,6 +1,6 @@
 import { useKeycloak } from "@react-keycloak/web";
 import { Navigate } from 'react-router-dom';
-const PrivateRoute = ({ children }) => {
+const CartUtils = ({ children }) => {
  const { keycloak } = useKeycloak();
 
  const isLoggedIn = keycloak.authenticated;
@@ -8,4 +8,4 @@ const PrivateRoute = ({ children }) => {
  return isLoggedIn ? children : <Navigate to={{ pathname: '/', }} />
 };
 
-export default PrivateRoute;
+export default CartUtils;
